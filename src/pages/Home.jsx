@@ -18,7 +18,6 @@ const Home = () => {
   const { searchValue } = useContext(searchContext);
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  // const [categoryID, setCategoryID] = useState(0);
 
   const [sortType, setSortType] = useState({
     name: 'популярности',
