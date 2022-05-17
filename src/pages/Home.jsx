@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 
 import Categories from '../components/Categories';
@@ -31,16 +32,16 @@ const Home = () => {
     const sortBy = sort.sortProperty.replace('-', '');
     const category = categoryID > 0 ? `category=${categoryID}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
-    fetch(
-      `https://627deaaeb75a25d3f3ae2170.mockapi.io/items?page=${currentPage}&limit=${4}&${category}&sortBy=${sortBy}&order=${order}${search}`,
-    )
+
+    axios
+      .get(
+        `https://627deaaeb75a25d3f3ae2170.mockapi.io/items?page=${currentPage}&limit=${4}&${category}&sortBy=${sortBy}&order=${order}${search}`,
+      )
       .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
+        setItems(res.data);
         setIsLoading(false);
       });
+
     window.scrollTo(0, 0);
   }, [categoryID, sort.sortProperty, searchValue, currentPage]);
 
