@@ -8,6 +8,27 @@ body {
   background-color: $background;
 }
 
+.title {
+  font-size: 45px;
+  line-height: 46px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.img-center {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.button--center {
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+}
+
 .wrapper {
   width: calc(100vw - 100px);
   height: 100%;
@@ -22,6 +43,20 @@ body {
 
 .content {
   padding: 40px 0;
+
+  &__error-info {
+      margin: 100px auto;
+      max-width: 400px;
+      text-align: center;
+      h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      p{
+        font-size: 20px;
+      }
+  }
 
   &__title {
     margin: 35px 0;

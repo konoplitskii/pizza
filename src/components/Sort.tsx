@@ -1,32 +1,42 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState ,MouseEvent} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { setSort, sortPropertyEnum } from '../redux/slices/filterSlice';
+import { RootState } from '../redux/store';
 
-export const sortList = [
-  { name: 'популярности(DESC)', sortProperty: 'rating' },
-  { name: 'популярности(ASK)', sortProperty: '-rating' },
-  { name: 'цене(DESC)', sortProperty: 'price' },
-  { name: 'цене(ASK)', sortProperty: '-price' },
-  { name: 'алфавиту(DESC)', sortProperty: 'title' },
-  { name: 'алфавиту(ASK)', sortProperty: '-title' },
+type sortTypeItem = {
+  name:string,
+  sortProperty:sortPropertyEnum
+}
+
+
+export const sortList:sortTypeItem[] = [
+  { name: 'популярности(DESC)', sortProperty: sortPropertyEnum.PRICE_DESC },
+  { name: 'популярности(ASK)', sortProperty: sortPropertyEnum.PRICE_ASC},
+  { name: 'цене(DESC)', sortProperty: sortPropertyEnum.PRICE_DESC},
+  { name: 'цене(ASK)', sortProperty:  sortPropertyEnum.PRICE_ASC},
+  { name: 'алфавиту(DESC)', sortProperty: sortPropertyEnum.TITLE_DESC},
+  { name: 'алфавиту(ASK)', sortProperty: sortPropertyEnum.TITLE_ASC },
 ];
 
-function Sort() {
+function SortPopup() {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector((state:RootState) => state.filter.sort);
 
-  const sortRef = useRef();
+  const sortRef = useRef<HTMLDivElement | null>(null);
 
-  const onSelectListItem = (obj) => {
+  const onSelectListItem = (obj:sortTypeItem) => {
     dispatch(setSort(obj));
     setOpen(false);
   };
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.path.includes(sortRef.current)) {
+    const handleClickOutside = (e:Event):void => {
+      const _e = e as Event & {
+        path:Node[]
+      };
+      if (sortRef.current && !_e.path.includes(sortRef.current)) {
         setOpen(false);
       }
     };
@@ -75,4 +85,4 @@ function Sort() {
   );
 }
 
-export default Sort;
+export default SortPopup;
