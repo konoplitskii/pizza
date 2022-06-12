@@ -5,10 +5,11 @@ import styles from './Pagination.module.scss';
 
 type PaginationProps = {
   currentPage:number;
+  totalPage:number;
   onChangePage:(selected:number)=> void;
 }
 
-const Pagination:FC<PaginationProps> = ({ currentPage, onChangePage }) => {
+const Pagination:FC<PaginationProps> = ({ currentPage, onChangePage,totalPage }) => {
   return (
     <ReactPaginate
       className={styles.root}

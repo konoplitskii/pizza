@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import qs from 'qs';
@@ -28,9 +28,9 @@ const Home = () => {
 
   const isMounted = useRef(false);
 
-  const onClickCategory = (id:number) => {
+  const onClickCategory = useCallback((id:number) => {
     dispatch(setCategoryId(id));
-  };
+  },[])
 
   const onChangePage = (number:number) => {
     dispatch(setCurrentPage(number));
@@ -104,9 +104,10 @@ const Home = () => {
 
   return (
     <div className="container">
+      
       <div className="content__top">
-        <Categories value={categoryID} onClickCategory={(id) => onClickCategory(id)} />
-        <SortPopup />
+        <Categories value={categoryID} onClickCategory={onClickCategory} />
+        <SortPopup value={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (
@@ -119,7 +120,9 @@ const Home = () => {
       ) : (
         <div className="content__items">{status === 'loading' ? skeletons : pizzas}</div>
       )}
-      <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+      {
+        pizzas.length > 0 ? <Pagination currentPage={currentPage} totalPage={ pizzas.length / 4} onChangePage={onChangePage} /> : null
+      }
     </div>
   );
 };

@@ -11,8 +11,8 @@ import './scss/app.scss';
 
 
 type GlobalContext = {
-  searchValue:string,
-  setSearchValue:React.Dispatch<React.SetStateAction<string>>
+  searchValue: string,
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const searchContext = React.createContext<GlobalContext>({} as GlobalContext);
