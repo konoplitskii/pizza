@@ -1,24 +1,10 @@
-import { calcTotalPrice } from './../../utils/calcTotalPrice';
-import { getCartFromLS } from './../../utils/getCartFromLS';
+import { calcTotalPrice } from './../../../utils/calcTotalPrice';
+import { getCartFromLS } from './../../../utils/getCartFromLS';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartItem, CartSliceState } from './../cart/types';
 
-export type CartItem = {
-  id:string,
-  title:string,
-  type:string,
-  price:number,
-  count:number,
-  imageUrl:string,
-  size:number
-}
-
-export interface CartSliceState {
-  totalPrice:number;
-  items:CartItem[]
-}
 
 const {items, totalPrice} = getCartFromLS();
-
 const initialState:CartSliceState = {
   totalPrice: totalPrice,
   items: items,

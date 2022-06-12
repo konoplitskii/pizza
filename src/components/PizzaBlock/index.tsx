@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addItem, CartItem } from '../../redux/slices/cartSlice';
+import { addItem} from '../../redux/slices/cart/slice';
+import { CartItem} from '../../redux/slices/cart/types';
 import { RootState } from '../../redux/store';
 
 type PizzaBlockProps = { 
@@ -14,7 +15,7 @@ type PizzaBlockProps = {
 }
 
 
-const PizzaBlock:FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
+export const PizzaBlock:FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, types }) => {
   const dispath = useDispatch();
   const cartItem = useSelector((state:RootState) => state.cart.items.find((obj) => obj.id === id));
   const [activeType, setActiveType] = useState(0);
@@ -92,4 +93,3 @@ const PizzaBlock:FC<PizzaBlockProps> = ({ id, title, price, imageUrl, sizes, typ
   );
 };
 
-export default PizzaBlock;

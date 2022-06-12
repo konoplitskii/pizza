@@ -1,13 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
 
 import { Header } from './components/Header';
 import Home from './pages/Home';
-import Cart from './pages/Cart';
-import NotFound from './pages/NotFound';
-import Pizza from './pages/Pizza';
 
 import './scss/app.scss';
+
+const Cart = React.lazy(() => import('./pages/Cart'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
+const Pizza = React.lazy(() => import('./pages/Pizza'));
 
 
 type GlobalContext = {
@@ -29,9 +30,9 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/pizza/:id" element={<Pizza />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/pizza/:id" element={<Suspense fallback="Идёт загрузка страницы..."><Pizza /></Suspense>} />
+              <Route path="/cart" element={<Suspense fallback="Идёт загрузка корзины..."><Cart /></Suspense>} />
+              <Route path="*" element={<Suspense fallback="Идёт загрузка страницы..."><NotFound /></Suspense>} />
             </Routes>
           </div>
         </searchContext.Provider>

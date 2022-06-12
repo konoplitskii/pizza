@@ -1,48 +1,10 @@
-import { CartItem } from './cartSlice';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { type } from 'os';
-import { Sort } from './filterSlice';
+import { Pizza, pizzaSliceState, SearchPizzaParams, Status } from './types';
 
 
-type Pizza = {
-  id:string, 
-  title:string, 
-  price:number, 
-  imageUrl:string,
-  sizes:number[], 
-  types:number[]
-}
 
-enum Status {
-  LOADING = "loading",
-  ERROR = "error",
-  SUCCESS = "success"
-}
-
-
-interface pizzaSliceState {
-  items:Pizza[];
-  status:Status
-}
-
-type FetchPizzasArgs = {
-  order:string, 
-  sortBy:string, 
-  category:string, 
-  search:string, 
-  currentPage:string, 
-}
-
-export type SearchPizzaParams = { 
-  order:string,
-  sortBy:string,
-  category:string,
-  search:string,
-  currentPage:string 
-}
-
-type FetchPizzasArgsR = Record<string,string>
 
 const initialState:pizzaSliceState = {
   items: [],

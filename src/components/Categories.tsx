@@ -6,9 +6,9 @@ type CategoriesProps = {
   onClickCategory:(i:number)=> void
 }
 
-const Categories:FC<CategoriesProps> = ({ value, onClickCategory })=> {
+export const Categories:FC<CategoriesProps> =  memo(({ value, onClickCategory })=> {
 
-  useWhyDidYouUpdate('Categories', { value, onClickCategory })
+  // useWhyDidYouUpdate('Categories', { value, onClickCategory })
 
   const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
 
@@ -25,6 +25,4 @@ const Categories:FC<CategoriesProps> = ({ value, onClickCategory })=> {
       </ul>
     </div>
   );
-}
-
-export default memo(Categories);
+})

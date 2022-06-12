@@ -6,16 +6,16 @@ import ReactPaginate from 'react-paginate';
 
 import { useNavigate } from 'react-router-dom';
 
-import Categories from '../components/Categories';
-import PizzaBlock from '../components/PizzaBlock';
-import SortPopup from '../components/Sort';
-import Skeleton from '../components/PizzaBlock/Skeleton';
-import Pagination from '../components/Pagination';
+import {Categories,PizzaBlock,SortPopup,Skeleton,Pagination} from '../components';
+
+
 import { searchContext } from '../App';
 import { useSelector } from 'react-redux';
-import { FilterSliceState, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
+import {setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filter/slice';
+import {FilterSliceState} from '../redux/slices/filter/types';
 import { sortList } from '../components/Sort';
-import { fetchPizzas, SearchPizzaParams } from '../redux/slices/pizzasSlice';
+import { fetchPizzas } from '../redux/slices/pizzas/slice';
+import {SearchPizzaParams} from '../redux/slices/pizzas/types';
 import { RootState, useAppDispatch } from '../redux/store';
 
 const Home = () => {
