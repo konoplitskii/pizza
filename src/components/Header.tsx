@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logoSvg from '../assets/img/pizza-logo.svg';
@@ -8,8 +8,16 @@ import Search from './Search';
 
 export const Header = () => {
   const { items, totalPrice } = useSelector((state:RootState) => state.cart);
-
+  const isMounted = useRef(false);
   const totalCount = items.reduce((sum:number, item:any) => sum + item.count, 0);
+
+  useEffect(()=> {
+    if(isMounted) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  },[items])
 
   return (
     <div className="header">
